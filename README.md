@@ -1,4 +1,4 @@
-# tracelink-mcp
+# Tracelink MCP Server
 
 MCP server der giver Claude og GitHub Copilot adgang til TraceLink API'et.
 
