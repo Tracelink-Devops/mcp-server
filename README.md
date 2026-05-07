@@ -1,6 +1,6 @@
 # Tracelink MCP Server
 
-MCP server der giver Claude og GitHub Copilot adgang til TraceLink API'et.
+MCP server that gives Claude and GitHub Copilot access to the TraceLink API.
 
 ## Installation
 
@@ -8,31 +8,34 @@ MCP server der giver Claude og GitHub Copilot adgang til TraceLink API'et.
 npm install
 ```
 
-## Konfiguration i Claude Desktop
+## Configuration in Claude Desktop
 
-Tilføj følgende til `~/Library/Application Support/Claude/claude_desktop_config.json`:
+Add the following to your Claude Desktop config file:
+
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json
 {
   "mcpServers": {
     "tracelink": {
       "command": "node",
-      "args": ["/fuld/sti/til/tracelink-mcp/index.js"],
+      "args": ["/full/path/to/tracelink-mcp/index.js"],
       "env": {
-        "TRACELINK_TOKEN": "dit-api-token-her"
+        "TRACELINK_TOKEN": "your-api-token-here"
       }
     }
   }
 }
 ```
 
-Genstart Claude Desktop — serveren starter automatisk.
+Restart Claude Desktop — the server starts automatically.
 
-## Konfiguration i VS Code (GitHub Copilot)
+## Configuration in VS Code (GitHub Copilot)
 
-Kræver VS Code 1.99+ og GitHub Copilot med Agent mode.
+Requires VS Code 1.99+ and GitHub Copilot with Agent mode enabled.
 
-Opret `.vscode/mcp.json` i dit workspace:
+Create `.vscode/mcp.json` in your workspace:
 
 ```json
 {
@@ -40,40 +43,40 @@ Opret `.vscode/mcp.json` i dit workspace:
     "tracelink": {
       "type": "stdio",
       "command": "node",
-      "args": ["/fuld/sti/til/tracelink-mcp/index.js"],
+      "args": ["/full/path/to/tracelink-mcp/index.js"],
       "env": {
-        "TRACELINK_TOKEN": "dit-api-token-her"
+        "TRACELINK_TOKEN": "your-api-token-here"
       }
     }
   }
 }
 ```
 
-Tools er herefter tilgængelige i Copilot Chat når Agent mode er aktivt.
+Tools are then available in Copilot Chat when Agent mode is active.
 
-## Tilgængelige tools
+## Available tools
 
-| Tool | Beskrivelse |
+| Tool | Description |
 |---|---|
-| `get_company` | Virksomhedens stamdata |
-| `list_departments` | Afdelinger |
-| `get_current_user` | Aktuel bruger |
-| `list_users` | Alle brugere |
-| `list_user_groups` | Brugergrupper |
-| `list_orders` | Ordrer med filter/sort/paging |
-| `get_order` | Specifik ordre |
-| `create_order` | Opret ordre |
-| `update_order` | Opdater ordre |
-| `delete_order` | Slet ordre |
-| `list_suborders` | Underordrer |
-| `get_suborder` | Specifik underordre |
-| `create_suborder` | Opret underordre |
-| `list_objects` | Objekter fra modul (purchase, genobj, customer, ...) |
-| `get_object` | Specifikt objekt |
-| `create_object` | Opret objekt |
-| `update_object` | Opdater objekt |
-| `list_order_module` | Tidsreg / opgaver på ordre |
-| `add_order_module` | Tilføj tidsreg / opgave |
-| `list_journal` | Journal/chat beskeder på et objekt |
-| `add_journal` | Tilføj besked eller hændelse til journal |
-| `list_relations` | Relationer mellem moduler |
+| `get_company` | Company master data |
+| `list_departments` | Departments |
+| `get_current_user` | Current authenticated user |
+| `list_users` | All users |
+| `list_user_groups` | User groups |
+| `list_orders` | Orders with filter/sort/paging |
+| `get_order` | Specific order |
+| `create_order` | Create order |
+| `update_order` | Update order |
+| `delete_order` | Delete order |
+| `list_suborders` | Suborders |
+| `get_suborder` | Specific suborder |
+| `create_suborder` | Create suborder |
+| `list_objects` | Objects from a module (purchase, genobj, customer, ...) |
+| `get_object` | Specific object |
+| `create_object` | Create object |
+| `update_object` | Update object |
+| `list_order_module` | Time registrations / tasks on an order |
+| `add_order_module` | Add time registration / task |
+| `list_journal` | Journal/chat messages on an object |
+| `add_journal` | Add message or event to journal |
+| `list_relations` | Relations between modules |
