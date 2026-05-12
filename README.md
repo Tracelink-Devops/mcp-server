@@ -1,6 +1,6 @@
 # Tracelink MCP Server
 
-MCP server that gives Claude and GitHub Copilot access to the TraceLink API.
+MCP server that gives Claude and GitHub Copilot access to the Tracelink API.
 
 ## Installation
 

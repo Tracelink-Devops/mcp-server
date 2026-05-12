@@ -31,7 +31,7 @@ const list_options_schema = {
 
 server.tool(
   "get_company",
-  "Henter TraceLink virksomhedens stamdata",
+  "Henter Tracelink virksomhedens stamdata",
   {},
   async () => toText(await client.company.get())
 );
@@ -86,7 +86,7 @@ server.tool(
 
 server.tool(
   "create_order",
-  "Opretter en ny ordre i TraceLink",
+  "Opretter en ny ordre i Tracelink",
   {
     number:      z.string().optional().describe("Ordrenummer"),
     name:        z.string().describe("Ordrenavn"),
@@ -163,7 +163,7 @@ const module_names = ["purchase", "genobj", "customer", "supplier", "crm", "docs
 
 server.tool(
   "list_objects",
-  `Henter objekter fra et TraceLink modul. Tilgængelige moduler: ${module_names.join(", ")}`,
+  `Henter objekter fra et Tracelink modul. Tilgængelige moduler: ${module_names.join(", ")}`,
   {
     module: z.enum(module_names).describe("Modulnavn"),
     ...list_options_schema,
