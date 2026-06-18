@@ -177,8 +177,10 @@ server.tool(
   {
     module:    z.enum(module_names).describe("Modulnavn"),
     object_id: z.number().describe("Objekt ID"),
+    expand:    z.union([z.string(), z.array(z.string())]).optional()
+      .describe("Subtabel(ler) der skal medtages i svaret, f.eks. 'line,journal' eller ['line', 'journal']"),
   },
-  async ({ module, object_id }) => toText(await client.object.get(module, object_id))
+  async ({ module, object_id, expand }) => toText(await client.object.get(module, object_id, { expand }))
 );
 
 server.tool(
