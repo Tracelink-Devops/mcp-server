@@ -1,62 +1,17 @@
 # Tracelink MCP Server
 
-MCP server that gives Claude and GitHub Copilot access to the Tracelink API.
+MCP server that gives Claude, ChatGPT and GitHub Copilot access to the Tracelink API.
 
-## Installation
+There are two ways to connect: a **hosted HTTPS server** (recommended) or the **local stdio server** in this repo.
 
-```bash
-npm install
-```
+- **HTTPS** — Tracelink hosts the server at `https://tracelink.dk/api/mcp`. Your client talks to it directly over the internet, authenticating with an API key in the `x-access-token` header. No installation, no local process, always up to date, and it exposes a broader/better tool set (e.g. document upload, tags, relations, schema introspection).
+- **stdio** — the client starts this repo's `index.js` as a local child process and talks to it over stdin/stdout. Requires Node.js, a local checkout, and `npm install`.
 
-## Configuration in Claude Desktop
+**The stdio server in this repo is no longer being actively developed and will be removed at a later point.** New setups should use the hosted HTTPS server below; existing stdio configurations should migrate when convenient.
 
-Add the following to your Claude Desktop config file:
+## Recommended: hosted HTTPS server
 
-- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
-- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "tracelink": {
-      "command": "node",
-      "args": ["/full/path/to/tracelink-mcp/index.js"],
-      "env": {
-        "TRACELINK_TOKEN": "your-api-token-here"
-      }
-    }
-  }
-}
-```
-
-Restart Claude Desktop — the server starts automatically.
-
-## Configuration in VS Code (GitHub Copilot)
-
-Requires VS Code 1.99+ and GitHub Copilot with Agent mode enabled.
-
-Create `.vscode/mcp.json` in your workspace:
-
-```json
-{
-  "servers": {
-    "tracelink": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["/full/path/to/tracelink-mcp/index.js"],
-      "env": {
-        "TRACELINK_TOKEN": "your-api-token-here"
-      }
-    }
-  }
-}
-```
-
-Tools are then available in Copilot Chat when Agent mode is active.
-
-## Alternative: hosted HTTPS server
-
-Instead of running this server locally over stdio, you can connect directly to Tracelink's hosted MCP server at `https://tracelink.dk/api/mcp`. This requires no local installation — just an API key sent via the `x-access-token` header.
+Connect directly to Tracelink's hosted MCP server at `https://tracelink.dk/api/mcp`. This requires no local installation — just an API key sent via the `x-access-token` header.
 
 You can configure this either by editing the config file directly (examples below), or through the user interface:
 
@@ -107,7 +62,65 @@ Custom MCP connectors require Developer mode, which must be enabled first:
 
 Availability of custom connectors and the exact menu wording depends on your ChatGPT plan (Plus/Pro/Team/Enterprise) and may change over time.
 
-## Available tools
+## Local stdio server (deprecated)
+
+> ⚠️ This local server is no longer actively developed and will be removed at a later point. Use the [hosted HTTPS server](#recommended-hosted-https-server) above instead.
+
+### Installation
+
+```bash
+npm install
+```
+
+### Configuration in Claude Desktop
+
+Add the following to your Claude Desktop config file:
+
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "tracelink": {
+      "command": "node",
+      "args": ["/full/path/to/tracelink-mcp/index.js"],
+      "env": {
+        "TRACELINK_TOKEN": "your-api-token-here"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop — the server starts automatically.
+
+### Configuration in VS Code (GitHub Copilot)
+
+Requires VS Code 1.99+ and GitHub Copilot with Agent mode enabled.
+
+Create `.vscode/mcp.json` in your workspace:
+
+```json
+{
+  "servers": {
+    "tracelink": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/full/path/to/tracelink-mcp/index.js"],
+      "env": {
+        "TRACELINK_TOKEN": "your-api-token-here"
+      }
+    }
+  }
+}
+```
+
+Tools are then available in Copilot Chat when Agent mode is active.
+
+### Available tools (stdio server)
+
+The hosted HTTPS server exposes a broader tool set (including document upload, tags, relations, and schema introspection); the table below lists only what the local stdio server supports.
 
 | Tool | Description |
 |---|---|
